@@ -1,0 +1,48 @@
+<%- include('../partials/header.ejs')%>
+<main>
+    <h2>Welcome, <%= user.firstName + " " + user.lastName%></h2>
+    <!-- Display user's movies -->
+    <%if(movies.length) {%>
+        <p>You have posted the following movies:</p>
+        <%movies.forEach(movie => {%>
+            <div id="profileMovieDisplay">
+                <a href="/movies/<%=movie.id%>"><p><%=movie.title%></p></a>
+                <% if(movie.active) { %>
+                    <p class="statusText">Status: Active</p>
+                <% } else { %>
+                    <p class="statusText">Status: Inactive</p>
+                <% } %>
+                <div id="profileEditDeleteButtons">
+                    <form method="GET" action="/movies/<%= movie.id %>/edit">
+                        <button class="edit-btn" type="submit">Edit</button>
+                    </form>
+                    <br>
+                    <form method="POST" action="/movies/<%= movie.id %>?_method=DELETE" style="display: inline;">
+                        <button class="delete-btn" type="submit">Delete</button>
+                    </form>
+                    <br>
+                    <form method="GET" action="/movies/offers/<%= movie.id %>">
+                        <button class="offers-btn" type="submit">Offers</button>
+                    </form>
+                </div>
+            </div>
+        <%});
+    } else {%>
+        <p>You have not posted any movies</p>
+    <%}%>
+
+    <!-- Display user's offers -->
+    <%if(movies.length) {%>
+        <p>You have made the following offers:</p>
+        <%offers.forEach(offer => {%>
+            <div id="profileMovieDisplay">
+                <a href="/movies/<%=offer.item.id%>"><p><%=offer.item.title%></p></a>
+                <p class="offerProfileDisplay">$<%=offer.amount%></p>
+                <p class="offerProfileDisplay">Status: <%=offer.status%></p>
+            </div>
+        <%});
+    } else {%>
+        <p>You have not posted any movies</p>
+    <%}%>
+</main>
+<%- include('../partials/footer.ejs')%>

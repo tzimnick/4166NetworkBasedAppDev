@@ -1,0 +1,33 @@
+<%- include('../partials/header.ejs') %>
+
+    <main>
+        <h1 class="sell-message">Available Movies:</h1>
+        <% if(parts.length) { %>
+            <div class="items-container">
+            <% parts.forEach(item => { %>
+                <% if(item.active) { %>
+                    <a class="movieDisplayBox" href="movies/<%= item.id%>">
+                        <article class="item-card" data-movie-id="<%= item.id %>">
+                            <div class="product-content">
+                                <h3><%= item.title %></h3>
+                                <img src="<%= item.image %>" alt="<%= item.title %>">
+                                <div class="item-info">
+                                    
+                                    <div class="item-price">Price: $<%= item.price %></div>
+                                    <div class="item-condition">Condition: <%= item.condition %></div>
+                                    <div class="item-genre">Genre: <%= item.genre %></div>
+                                    <div class="item-details">Info: <%= item.details %></div>
+                                    <div class="item-offers">Offers: <%= item.totalOffers %></div>
+                                </div>
+                                
+                            </div>
+                        </article>
+                    </a>
+                <% } %>
+            <% }); %>
+        <% } else { %>
+            <p>There are no available movies!</p>
+        <% } %>
+    </main>
+
+<%- include('../partials/footer.ejs') %>

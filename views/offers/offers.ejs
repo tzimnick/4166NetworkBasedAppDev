@@ -1,0 +1,36 @@
+<%- include('../partials/header.ejs')%>
+<main>
+    <% if(offers.length) { %>
+    <table>
+            <tr>
+                <th>Buyer</th>
+                <th>Amount</th>
+                <% if(isAccepted == true) { %>
+                    <th>Status</th>
+                <% } else { %>
+                    <th>Actions</th>
+                <% } %>
+                
+            </tr>
+                <% offers.forEach(offer => { %>
+                    <tr class="offerDisplayRows">
+                    <td><%= offer.user.firstName  + " " + offer.user.lastName%></td>
+                    <td>$<%= offer.amount %></td>
+                    <% if(isAccepted == true) { %>
+                        <td><%= offer.status %></td>
+                    <% } else { %>
+                        <td>
+                            <form method="POST" action="/movies/offers/<%= offer.id %>/accept">
+                                <button class="accept-btn" type="submit">Accept Offer</button>
+                            </form>
+                        </td>
+                    <% } %>
+                    </tr>
+                
+                <% }); %>
+        </table>
+    <% } else { %>
+        <p>You have not received any offers yet.</p>
+    <% } %>
+</main>
+<%- include('../partials/footer.ejs')%>

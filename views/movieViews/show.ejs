@@ -1,0 +1,31 @@
+<%- include('../partials/header.ejs') %>
+
+    <main>
+        <div class="single-item-main-container">
+            <div class="single-item-image">
+                <img src="<%= movie.image%>" alt="<%= movie.title%>">
+            </div>
+            <div class="single-item-info">
+                <h1 class="single-title"><%= movie.title%></h1>
+                <h2 class="single-seller"><%= movie.seller.firstName + ' ' + movie.seller.lastName%></h2>
+                <h2 class="single-price">$<%= movie.price%></h2>
+                <h2 class="single-condition">Condition: <%= movie.condition%></h2>
+                <h2 class="single-genre">Genre: <%= movie.genre%></h2>
+                <h2 class="single-offers"># of Offers: <%= movie.totalOffers%></h2>
+                <h3 class="single-description">Description: <%= movie.details%></h3>
+                <%if(user != movie.seller._id) {
+                    if(movie.active) { %>
+                        <form method="POST" action="/movies/offers/<%= movie.id %>" style="display: inline;">
+                            <input type="number" id="amount" name="amount" min="0.01" step="0.01" required>
+                            <button class="offer-btn" type="submit">Make Offer</button>
+                        </form>
+                        <h3>Highest Offer: <%= movie.highestOffer%></h3>
+                    <% } else { %>
+                        <h2>Sorry, this item is no longer available.</h2>
+                    <% } %>
+                <% } %>
+            </div>
+        </div>
+    </main>
+
+<%- include('../partials/footer.ejs') %>

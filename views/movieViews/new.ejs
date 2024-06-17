@@ -1,0 +1,38 @@
+<%- include('../partials/header.ejs') %>
+
+    <main>
+        <div class="new-main-container">
+            <div class="left-container">
+                <h1 class="sell-message">Sell your movie:</h1>
+                <ul class="sell-list">
+                    <li>Enter the movie's title and condition.</li>
+                    <li>Set asking price for the movie.</li>
+                    <li>Provide any further information.</li>
+                    <li>Upload a picture of the movie.</li>
+                </ul>
+            </div>
+            <div class="right-container">
+                <div class="form-container">
+                    <h2 class="form-title">Enter your movie details here:</h2>
+                    <form method="POST" action="/movies" enctype="multipart/form-data">
+                        <input type="text" name="title" id="title" placeholder="Title" required>
+                        <input type="text" name="genre" id="genre" placeholder="Genre" required>
+                        <select name="condition" required>
+                            <option disabled selected value> -- Select condition -- </option>
+                            <option value="new">New / Unopened</option>
+                            <option value="light">Lightly Used</option>
+                            <option value="moderate">Moderately Used</option>
+                            <option value="heavy">Heavily Used</option>
+                        </select>
+                        <input type="number" name="price" min="0.01" step="any" placeholder="Price" required>
+                        <textarea name="details" id="message" placeholder="Additional Info"></textarea>
+                        <input type="file" id="myFile" name="image" required>
+                        <input type="submit" name="submit" id ="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+
+<%- include('../partials/footer.ejs') %>
